@@ -15,7 +15,7 @@ func GetParam(res http.ResponseWriter, req *http.Request) {
 	if !ok {
 		fmt.Println("Failed")
 	}
-	res.Write([]byte(fmt.Sprintf("Hello, %s", param)))
+	res.Write([]byte(fmt.Sprintf("Hello, %s!", param)))
 }
 
 func GetBad(res http.ResponseWriter, req *http.Request) {
@@ -28,7 +28,7 @@ func PostBody(res http.ResponseWriter, req *http.Request) {
 		res.Write([]byte(err.Error()))
 	}
 
-	returnData := append([]byte("I got a message: \n"), data...)
+	returnData := append([]byte("I got message:\n"), data...)
 
 	res.Write(returnData)
 }
