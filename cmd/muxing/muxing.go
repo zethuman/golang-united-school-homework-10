@@ -7,6 +7,7 @@ import (
 	"os"
 	"strconv"
 
+	handler "github.com/GolangUnited/helloweb/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -20,6 +21,11 @@ main function reads host/port from env just for an example, flavor it following 
 // Start /** Starts the web server listener on given host and port.
 func Start(host string, port int) {
 	router := mux.NewRouter()
+
+	router.HandleFunc("/name/{PARAM}", handler.GetParam).Methods(http.MethodGet)
+	router.HandleFunc("/bad", handler.GetBad).Methods(http.MethodGet)
+	router.HandleFunc("/data", handler.PostBody).Methods(http.MethodPost)
+	router.HandleFunc("/headers", handler.PostHeaders).Methods(http.MethodPost)
 
 	log.Println(fmt.Printf("Starting API server on %s:%d\n", host, port))
 	if err := http.ListenAndServe(fmt.Sprintf("%s:%d", host, port), router); err != nil {
